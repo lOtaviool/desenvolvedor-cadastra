@@ -1,0 +1,21 @@
+.container {
+  margin: 10px 100px;
+
+  h2 {
+    font-size: 44px;
+    margin-bottom: 20px;
+  }
+}
+
+.content-list {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+}
+
+.list-data {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 40px;
+}

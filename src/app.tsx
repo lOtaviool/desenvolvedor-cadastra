@@ -1,16 +1,21 @@
 import React, { useEffect } from "react";
 import { main } from "./ts/index";
-import Home from "./pages/home";
+import Home from "./pages/Home/home";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const App: React.FC = () => {
   useEffect(() => {
     main();
   }, []);
 
+  const queryClient = new QueryClient();
+
   return (
-    <div>
-      <Home />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <Home />
+      </div>
+    </QueryClientProvider>
   );
 };
 
