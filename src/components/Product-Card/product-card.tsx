@@ -1,4 +1,12 @@
 import { Product } from "../../ts/Product";
+import "./product-card.scss";
+
+function formatMoney(value: number) {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(value);
+}
 
 interface Props {
   product: Product;
@@ -12,8 +20,10 @@ export default function ProductCard({ product, onClickBuy }: Props) {
 
       <div className="product-info">
         <h4 className="product-title">{product?.name}</h4>
-        <p className="product-price">{product?.price}</p>
-        {/* <p className="product-installment">{installment}</p> */}
+        <p className="product-price">{formatMoney(product?.price)}</p>
+        <p className="product-installment">{`até ${
+          product?.parcelamento[0]
+        }x de ${formatMoney(product?.parcelamento[1])}`}</p>
       </div>
 
       <button className="product-button" onClick={onClickBuy}>

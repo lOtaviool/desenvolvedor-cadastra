@@ -1,17 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Product } from "../../ts/Product";
 
 interface Props {
   products?: Product[];
-  setProducts?: React.Dispatch<React.SetStateAction<Product[]>>;
+  setProducts?: (products: Product[]) => void;
 }
 
-const Filters: React.FC<Props> = ({ products, setProducts }) => {
-  const [selectedColor, setSelectedColor] = useState<string | null>("Amarelo");
-  const [selectedSize, setSelectedSize] = useState<string | null>("M");
+export default function Filters({ products, setProducts }: Props) {
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
 
-  const colors = ["Amarelo", "Azul", "Branco", "Cinza", "Laranja"];
+  function filterProducts() {
+    const filtered = products?.filter((product) => {
+      const matchColor = selectedColor ? product.color === selectedColor : true;
+      const matchSize = selectedSize ? product.size[0] === selectedSize : true;
+      const matchPrice = selectedPrice
+        ? checkPrice(product.price, selectedPrice)
+        : true;
+
+      return matchColor && matchSize && matchPrice;
+    });
+
+    if (setProducts && filtered) setProducts(filtered);
+  }
+
+  useEffect(() => {
+    filterProducts();
+  }, [selectedColor, selectedSize, selectedPrice, products]);
+
+  const colors = [
+    "Amarelo",
+    "Azul",
+    "Branco",
+    "Cinza",
+    "Laranja",
+    "Verde",
+    "Vermelho",
+    "Preto",
+    "Rosa",
+    "Vinho",
+  ];
   const sizes = ["P", "M", "G", "GG", "U", "36", "38", "40"];
   const prices = [
     "de R$0 até R$50",
@@ -32,7 +61,9 @@ const Filters: React.FC<Props> = ({ products, setProducts }) => {
                 <input
                   type="checkbox"
                   checked={selectedColor === color}
-                  onChange={() => setSelectedColor(color)}
+                  onChange={() =>
+                    setSelectedColor(selectedColor === color ? null : color)
+                  }
                 />
                 {color}
               </label>
@@ -48,7 +79,9 @@ const Filters: React.FC<Props> = ({ products, setProducts }) => {
             <button
               key={size}
               className={`size-button ${selectedSize === size ? "active" : ""}`}
-              onClick={() => setSelectedSize(size)}
+              onClick={() =>
+                setSelectedSize(selectedSize === size ? null : size)
+              }
             >
               {size}
             </button>
@@ -65,7 +98,9 @@ const Filters: React.FC<Props> = ({ products, setProducts }) => {
                 <input
                   type="checkbox"
                   checked={selectedPrice === price}
-                  onChange={() => setSelectedPrice(price)}
+                  onChange={() =>
+                    setSelectedPrice(selectedPrice === price ? null : price)
+                  }
                 />
                 {price}
               </label>
@@ -75,6 +110,21 @@ const Filters: React.FC<Props> = ({ products, setProducts }) => {
       </div>
     </div>
   );
-};
+}
 
-export default Filters;
+function checkPrice(productPrice: number, priceRange: string) {
+  switch (priceRange) {
+    case "de R$0 até R$50":
+      return productPrice <= 50;
+    case "de R$51 até R$150":
+      return productPrice >= 51 && productPrice <= 150;
+    case "de R$151 até R$300":
+      return productPrice >= 151 && productPrice <= 300;
+    case "de R$301 até R$500":
+      return productPrice >= 301 && productPrice <= 500;
+    case "a partir de R$ 500":
+      return productPrice >= 500;
+    default:
+      return true;
+  }
+}
