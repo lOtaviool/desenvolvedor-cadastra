@@ -1,0 +1,46 @@
+.custom-select {
+  position: relative;
+  width: 182px;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #666;
+  padding: 8px 10px;
+  background: #fff;
+  user-select: none;
+}
+
+.options {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  border: 1px solid #666;
+  border-top: none;
+  background: #fff;
+  font-size: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 10;
+}
+
+.options li {
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.options li:hover {
+  background: #fb953e;
+  color: #fff;
+}
+
+.options li.selected {
+  background: #fb953e;
+  color: #fff;
+}

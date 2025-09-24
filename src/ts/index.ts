@@ -2,7 +2,7 @@ import { Product } from "./Product";
 
 const serverUrl = "http://localhost:5000";
 
-function main() {
+export function main() {
   console.log(serverUrl);
 }
 

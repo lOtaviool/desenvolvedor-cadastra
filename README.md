@@ -89,8 +89,6 @@ Email: luisotavio95@gmail.com
 ### Dependencias
 - React & React-Dom
 - Typescript
-=======
->>>>>>> main
 - React-Query
 - Axios
 
