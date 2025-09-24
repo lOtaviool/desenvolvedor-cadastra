@@ -1,9 +1,13 @@
 // @import "reset";
 @import "../pages/Home/home.scss";
 @import "../components/Header/header.scss";
+@import "../components/Footer/footer.scss";
 @import "../components/List-Products/list-products.scss";
-@import "../components/Filters/filters.scss";
 @import "../components/Product-Card/product-card.scss";
+@import "../components/Filters/filters.scss";
+@import "../components/Drawers/Filters-Mobile/filters-mobile.scss";
+@import "../components/Order/order.scss";
+@import "../components/Drawers/Order-Mobile/order-mobile.scss";
 
 html,
 body {

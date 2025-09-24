@@ -5,6 +5,9 @@ import Filters from "../Filters/filters";
 import ProductCard from "../Product-Card/product-card";
 import "./list-products.scss";
 import { useMobile } from "../../hooks/use-mobile";
+import FiltersMobile from "../Drawers/Filters-Mobile/filters-mobile";
+import OrderMobile from "../Drawers/Order-Mobile/order-mobile";
+import Order from "../Order/order";
 
 export default function ListProducts() {
   const { data, isLoading, isError } = useGetProducts();
@@ -14,7 +17,7 @@ export default function ListProducts() {
 
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [sortOrder, setSortOrder] = useState<
-    "Mais recente" | "Menor Preço" | "Maior Preço" | ""
+    "Mais Recente" | "Menor Preço" | "Maior Preço" | ""
   >("");
 
   useEffect(() => {
@@ -59,73 +62,14 @@ export default function ListProducts() {
             </button>
           </div>
         ) : (
-          <div className="order-by">
-            <label htmlFor="sortOrder">Ordenar por:</label>
-            <select
-              id="sortOrder"
-              value={sortOrder}
-              onChange={(e) =>
-                setSortOrder(
-                  e.target.value as
-                    | "Mais recente"
-                    | "Menor Preço"
-                    | "Maior Preço"
-                    | ""
-                )
-              }
-            >
-              <option value="">--</option>
-              <option value="Mais recente">Mais recente</option>
-              <option value="Menor Preço">Menor Preço</option>
-              <option value="Maior Preço">Maior Preço</option>
-            </select>
-          </div>
+          <Order placeholder="Ordenar por: " setOrder={setSortOrder} />
         )}
       </div>
 
       {isMobile && (
         <div>
-          <div className="drawer drawer-filters">
-            <button
-              className="close"
-              onClick={() =>
-                document.body.classList.remove("drawer-filters-open")
-              }
-            >
-              x
-            </button>
-            <h3>Filtros</h3>
-            <Filters products={data} setProducts={setFilteredProducts} />
-          </div>
-
-          <div className="drawer drawer-order">
-            <button
-              className="close"
-              onClick={() =>
-                document.body.classList.remove("drawer-order-open")
-              }
-            >
-              x
-            </button>
-            <h3>Ordenar por</h3>
-            <select
-              value={sortOrder}
-              onChange={(e) =>
-                setSortOrder(
-                  e.target.value as
-                    | "Mais recente"
-                    | "Menor Preço"
-                    | "Maior Preço"
-                    | ""
-                )
-              }
-            >
-              <option value="">--</option>
-              <option value="Mais recente">Mais recente</option>
-              <option value="Menor Preço">Menor Preço</option>
-              <option value="Maior Preço">Maior Preço</option>
-            </select>
-          </div>
+          <FiltersMobile products={data} setProducts={setFilteredProducts} />
+          <OrderMobile setOrder={setSortOrder} />
         </div>
       )}
 
@@ -135,17 +79,22 @@ export default function ListProducts() {
         </div>
 
         <div className="list-data">
-          {visibleProducts.length > 0 ? (
+          {(isError || visibleProducts.length <= 0 || isLoading) && (
+            <div className="nothing-data">
+              <span>Nenhum produto encontrado! :(</span>
+            </div>
+          )}
+
+          {visibleProducts.length > 0 &&
+            !isError &&
+            !isLoading &&
             visibleProducts.map((product: Product, index) => (
               <ProductCard
                 key={index}
                 product={product}
                 onClickBuy={() => {}}
               />
-            ))
-          ) : (
-            <h1>Nenhum produto encontrado! :(</h1>
-          )}
+            ))}
         </div>
       </div>
 
