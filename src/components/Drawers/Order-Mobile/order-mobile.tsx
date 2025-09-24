@@ -24,14 +24,14 @@ export default function OrderMobile({ setOrder }: Props) {
 
   return (
     <div className="drawer drawer-order">
-      <div className="header">
+      <div className="head">
+        <span>ORDENAR</span>
         <button
           className="close"
           onClick={() => document.body.classList.remove("drawer-order-open")}
         >
           x
         </button>
-        <span>ORDENAR</span>
       </div>
       <div>
         <button className="topic" onClick={() => setOrderTopic("Mais Recente")}>

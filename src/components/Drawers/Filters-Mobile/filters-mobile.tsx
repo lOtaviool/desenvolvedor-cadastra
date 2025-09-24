@@ -62,22 +62,16 @@ export default function FilterMobile({ products, setProducts }: Props) {
     "a partir de R$ 500",
   ];
 
-  //   const toggleSelection = (color: string) => {
-  //     setSelectedColor((prev) =>
-  //       prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]
-  //     );
-  //   };
-
   return (
     <div className="drawer drawer-filters">
-      <div className="header">
+      <div className="head">
+        <span>FILTRAR</span>
         <button
           className="close"
           onClick={() => document.body.classList.remove("drawer-filters-open")}
         >
           x
         </button>
-        <span>FILTRAR</span>
       </div>
       <div>
         <button className="topic" onClick={() => setOpenColor(!openColor)}>

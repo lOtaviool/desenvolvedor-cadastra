@@ -10,7 +10,9 @@
   padding: 2px;
   overflow-y: auto;
 
-  .header {
+  .head {
+    display: flex !important;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     padding: 10px 10px;
@@ -29,7 +31,6 @@
     color: #666;
     font-family: "Open sans", sans-serif;
     cursor: pointer;
-    position: absolute;
   }
 
   .topic {
@@ -41,16 +42,11 @@
     padding: 0 10px;
     margin: 30px 0;
     width: 100%;
-    color: #666;
     cursor: pointer;
-    span {
-      font-size: 28px;
-      color: #666;
-    }
-  }
 
-  .topic.active {
-    background-color: #fb953e;
-    color: #fff;
+    span {
+      font-size: 22px;
+      color: #333;
+    }
   }
 }
