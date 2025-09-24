@@ -74,3 +74,26 @@ O objetivo desse desafio é avaliar a seus conhecimentos fundamentais de front e
 - Adição de processo no gulp para otimizar imagens
 
 ##### Dúvidas: [vinicius.delfino@cadastra.com](mailto:vinicius.delfino@cadastra.com?subject=Dúvida%20Vaga%20DEV%20-%20Cadastra)
+
+# Resultado
+
+Candidato: Luis Otávio Oliveira
+
+Email: luisotavio95@gmail.com
+
+
+### Pré-requisitos
+- Node.js
+- Npm
+
+### Dependencias
+- React & React-Dom
+- Typescript
+- React-Query
+- Axios
+
+### Instalação
+- git clone https://github.com/lOtaviool/desenvolvedor-cadastra
+- cd desenvolvedor-cadastra
+- npm install
+- npm run start
