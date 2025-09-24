@@ -7,7 +7,6 @@ const autoprefixer = require("gulp-autoprefixer");
 const sass = require("gulp-sass")(require("sass"));
 const sourcemaps = require("gulp-sourcemaps");
 const browserSync = require("browser-sync").create();
-const imagemin = require("gulp-imagemin");
 
 const webpackConfig = require("./webpack.config.js");
 
@@ -102,16 +101,8 @@ const dev = () => {
   server();
 };
 
-//Otimização de imagens
-function optimizeImages() {
-  return src("src/assets/images/*")
-    .pipe(imagemin())
-    .pipe(dest("dist/assets/images"));
-}
-
 exports.build = build;
 exports.server = server;
 exports.styles = styles;
 exports.scripts = scripts;
 exports.default = dev;
-exports.images = optimizeImages;
